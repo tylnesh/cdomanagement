@@ -3,10 +3,13 @@ package com.motostylemx.cdomanagement.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class Dealer {
     @Getter
     @Setter
