@@ -1,19 +1,20 @@
-package com.motostylemx.cdomanagment.dao;
+package com.motostylemx.cdomanagement.dao;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.motostylemx.cdomanagment.model.Dealer;
+import com.motostylemx.cdomanagement.model.Dealer;
 
 public interface DealerDao {
 
     int insertDealer(Dealer dealer);
+
     List<Dealer> selectAllDealers();
 
     Optional<Dealer> selectDealerById(int id);
 
-    int deletePerson(int id);
-    int updatePerson(int id, Dealer dealer);
+    int deleteDealer(int id);
 
-    
+    int updateDealer(int id, Dealer dealer);
+
 }
