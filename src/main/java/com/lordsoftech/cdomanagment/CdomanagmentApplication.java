@@ -1,4 +1,4 @@
-package com.lordsoftech.cdomanagment.cdomanagment;
+package com.lordsoftech.cdomanagment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

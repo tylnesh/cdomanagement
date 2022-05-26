@@ -1,6 +1,6 @@
-package com.lordsoftech.cdomanagment.cdomanagment.repository;
+package com.lordsoftech.cdomanagment.repository;
 
-import com.lordsoftech.cdomanagment.cdomanagment.model.Dealer;
+import com.lordsoftech.cdomanagment.model.Dealer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
