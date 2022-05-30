@@ -36,6 +36,6 @@ public class User {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-  private boolean isVerified
+  private boolean isVerified;
 
 }
