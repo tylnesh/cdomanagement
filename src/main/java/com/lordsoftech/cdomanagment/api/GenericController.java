@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
         return ResponseEntity.ok(service.update(updated));
     }
 
-    @PostMapping("")
+    @PostMapping(path = "/put", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<T> create(@RequestBody @Valid T created) {
         return ResponseEntity.ok(service.create(created));
     }
