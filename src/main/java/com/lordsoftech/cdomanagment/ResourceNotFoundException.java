@@ -11,4 +11,9 @@ public class ResourceNotFoundException extends Exception {
     public ResourceNotFoundException(String message) {
         super(message);
     }
+
+    public ResourceNotFoundException(Long id) {
+
+        super("An Object by this ID is not found:: " + id);
+    }
 }
