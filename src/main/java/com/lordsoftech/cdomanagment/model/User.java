@@ -62,11 +62,8 @@ public class User {
     return salt;
   }
 
-<<<<<<< HEAD
-  private boolean isVerified;
-=======
   public User() {
-  }
->>>>>>> 613793c81fdeb07e51150809a482a5e3b9a82d2e
+    
+  };
 
 }

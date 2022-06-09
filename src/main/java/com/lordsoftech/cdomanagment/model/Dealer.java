@@ -24,10 +24,12 @@ public class Dealer implements GenericEntity<Dealer> {
     @Column(columnDefinition = "varchar(255) default ''")
     private String dealer;
 
-    @Column(columnDefinition = "varchar(255) default ''")
+    @Column(columnDefinition = "varchar(10) default ''")
     private String slug;
 
+    @Column(name = "createdAt")
     private Timestamp createdAt;
+    @Column(name = "updatedAt")
     private Timestamp updatedAt;
 
     public Dealer() {
