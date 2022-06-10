@@ -27,9 +27,9 @@ public class Dealer implements GenericEntity<Dealer> {
     @Column(columnDefinition = "varchar(10) default ''")
     private String slug;
 
-    @Column(name = "createdAt")
+    @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
     private Timestamp createdAt;
-    @Column(name = "updatedAt")
+    @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
     private Timestamp updatedAt;
 
     public Dealer() {
