@@ -1,6 +1,6 @@
 package com.lordsoftech.cdomanagment.model;
 
-import java.security.Timestamp;
+import java.sql.Time;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,10 +27,10 @@ public class Dealer implements GenericEntity<Dealer> {
     @Column(columnDefinition = "varchar(10) default ''")
     private String slug;
 
-    @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
-    private Timestamp createdAt;
-    @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
-    private Timestamp updatedAt;
+    //@Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
+    private Time createdAt;
+    //@Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
+    private Time updatedAt;
 
     public Dealer() {
     }
@@ -55,12 +55,12 @@ public class Dealer implements GenericEntity<Dealer> {
     }
 
     @Override
-    public Timestamp getCreatedAt() {
+    public Time getCreatedAt() {
         return this.createdAt;
     }
 
     @Override
-    public Timestamp getUpdatedAt() {
+    public Time getUpdatedAt() {
         return this.updatedAt;
     }
 }

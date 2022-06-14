@@ -1,6 +1,7 @@
 package com.lordsoftech.cdomanagment.model;
 
-import java.security.Timestamp;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public interface GenericEntity<T> {
 
@@ -10,7 +11,7 @@ public interface GenericEntity<T> {
 
     T createNewInstance();
 
-    Timestamp getCreatedAt();
+    Time getCreatedAt();
 
-    Timestamp getUpdatedAt();
+    Time getUpdatedAt();
 }
