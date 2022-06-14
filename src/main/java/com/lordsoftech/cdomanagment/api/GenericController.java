@@ -41,7 +41,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
         return ResponseEntity.ok(service.update(updated));
     }
 
-    @PostMapping(path = "/put", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<T> create(@RequestBody @Valid T created) {
         return ResponseEntity.ok(service.create(created));
     }
