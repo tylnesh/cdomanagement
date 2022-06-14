@@ -1,5 +1,9 @@
 package com.lordsoftech.cdomanagment.model;
 
+import java.sql.Timestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,11 +29,11 @@ public class Dealer implements GenericEntity<Dealer> {
     @Column(columnDefinition = "varchar(10) default ''")
     private String slug;
 
-    // @Column(name = "createdAt", columnDefinition = "timestamp default
-    // current_timestamp")
+    @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp createdAt;
-    // @Column(name = "updatedAt", columnDefinition = "timestamp default
-    // current_timestamp")
+    @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp updatedAt;
 
     public Dealer() {
@@ -44,7 +48,7 @@ public class Dealer implements GenericEntity<Dealer> {
     public void update(Dealer source) {
         this.setDealer(source.getDealer());
         this.setSlug(source.getSlug());
-
+        this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
     }
 
     @Override
@@ -55,12 +59,13 @@ public class Dealer implements GenericEntity<Dealer> {
     }
 
     @Override
-    public java.sql.Timestamp getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return this.createdAt;
     }
 
     @Override
-    public java.sql.Timestamp getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return this.updatedAt;
     }
+
 }

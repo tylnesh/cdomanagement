@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,14 +18,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-public class User {
+@Data
+public class User implements GenericEntity<User> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
@@ -40,7 +40,11 @@ public class User {
   @Column(columnDefinition = "blob(16) default ''")
   private byte[] salt;
 
+  @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
   private Timestamp createdAt;
+  @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
   private Timestamp updatedAt;
 
   private Timestamp tokenExpiration;
@@ -63,7 +67,26 @@ public class User {
   }
 
   public User() {
-    
+
+  }
+
+  @Override
+  public Long getId() {
+    return this.id;
+  }
+
+  @Override
+  public void update(User source) {
+    this.setEmail(source.getEmail());
+    this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
+  }
+
+  @Override
+  public User createNewInstance() {
+    User newInstance = new User();
+    newInstance.update(this);
+    return (newInstance);
   };
 
 }
