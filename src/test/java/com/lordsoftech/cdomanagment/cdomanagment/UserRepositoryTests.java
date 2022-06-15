@@ -41,7 +41,8 @@ public class UserRepositoryTests {
         assertTrue(user.getPasswordHashed().equals(existUser.getPasswordHashed()));
         try {
             assertTrue(
-                    user.getPasswordHashed().equals(existUser.hashPassword("randomBsPassword", existUser.getSalt())));
+                    user.getPasswordHashed().equals(existUser.getPasswordHashed()));
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
