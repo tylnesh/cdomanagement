@@ -21,11 +21,11 @@ public class UserController {
 
     @Autowired
     private UserRepository repo;
-    private BCryptPasswordEncoder bcrypter;
+    // private BCryptPasswordEncoder bcrypter;
 
-    @PostMapping
+    @PostMapping("/registration")
     public void signUp(@RequestBody User user) {
-        user.setPassword(bcrypter.encode(user.getPassword()));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         repo.save(user);
 
     }
