@@ -16,6 +16,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -34,11 +36,8 @@ public class User implements GenericEntity<User> {
   @Column(columnDefinition = "varchar(255) default ''")
   private String email;
 
-  @Column(columnDefinition = "blob(255) default ''")
-  private byte[] passwordHashed;
-
-  @Column(columnDefinition = "blob(16) default ''")
-  private byte[] salt;
+  @Column(columnDefinition = "varchar(255) default ''")
+  private String password;
 
   @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
@@ -52,19 +51,24 @@ public class User implements GenericEntity<User> {
 
   private boolean isVerified;
 
-  public byte[] hashPassword(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
-    SecretKeyFactory factory = null;
-    factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-    KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-    return factory.generateSecret(spec).getEncoded();
-  }
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  private Role role;
 
-  public byte[] generateHashSalt() {
-    SecureRandom random = new SecureRandom();
-    byte[] salt = new byte[16];
-    random.nextBytes(salt);
-    return salt;
-  }
+  // public byte[] hashPassword(String password, byte[] salt) throws
+  // InvalidKeySpecException, NoSuchAlgorithmException {
+  // SecretKeyFactory factory = null;
+  // factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+  // KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+  // return factory.generateSecret(spec).getEncoded();
+  // }
+
+  // public byte[] generateHashSalt() {
+  // SecureRandom random = new SecureRandom();
+  // byte[] salt = new byte[16];
+  // random.nextBytes(salt);
+  // return salt;
+  // }
 
   public User() {
 

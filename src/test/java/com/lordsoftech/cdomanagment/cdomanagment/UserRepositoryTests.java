@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.lordsoftech.cdomanagment.model.User;
@@ -27,25 +28,14 @@ public class UserRepositoryTests {
     public void testCreateUser() {
         User user = new User();
         user.setEmail("testingUser@test.com");
-        user.setSalt(user.generateHashSalt());
-        try {
-            user.setPasswordHashed(user.hashPassword("randomBsPassword", user.getSalt()));
-            System.out.println(user.getPasswordHashed());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        user.setPassword(new BCryptPasswordEncoder().encode("blbeRandomHeslo"));
+
         User savedUser = repo.save(user);
         User existUser = entityManager.find(User.class, savedUser.getId());
 
         assertTrue(user.getEmail().equals(existUser.getEmail()));
-        assertTrue(user.getPasswordHashed().equals(existUser.getPasswordHashed()));
-        try {
-            assertTrue(
-                    user.getPasswordHashed().equals(existUser.getPasswordHashed()));
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        assertTrue(user.getPassword().equals(existUser.getPassword()));
+        assertTrue(new BCryptPasswordEncoder().matches("blbeRandomHeslo", existUser.getPassword()));
 
     }
 
