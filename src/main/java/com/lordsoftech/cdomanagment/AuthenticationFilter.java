@@ -38,15 +38,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
-    protected void successfulAuthentication(HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain, Authentication authentication) {
-        String token = Jwts.builder()
-                .setSubject(((User) authentication.getPrincipal()).getEmail())
-                .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
-                .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".getBytes())
-                .compact();
-        response.addHeader("Authorization", "Bearer " + token);
-    }
+    // protected void successfulAuthentication(HttpServletRequest request,
+    //         HttpServletResponse response,
+    //         FilterChain filterChain, Authentication authentication) {
+    //     String token = Jwts.builder()
+    //             .setSubject(((User) authentication.getPrincipal()).getEmail())
+    //             .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
+    //             .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".getBytes())
+    //             .compact();
+    //     response.addHeader("Authorization", "Bearer " + token);
+    // }
 
 }
