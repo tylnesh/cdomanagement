@@ -2,6 +2,11 @@ package com.lordsoftech.cdomanagment.model;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -18,8 +23,9 @@ import lombok.Data;
 @Data
 public class Dealer implements GenericEntity<Dealer> {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_generator")
-    @SequenceGenerator(name = "dealer_generator", sequenceName = "dealer_seq", allocationSize = 1)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dealer_generator")
+    //@SequenceGenerator(name = "dealer_generator", sequenceName = "dealer_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
@@ -29,9 +35,11 @@ public class Dealer implements GenericEntity<Dealer> {
     @Column(columnDefinition = "varchar(10) default ''")
     private String slug;
 
+    @CreationTimestamp
     @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp createdAt;
+    @UpdateTimestamp
     @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp updatedAt;
