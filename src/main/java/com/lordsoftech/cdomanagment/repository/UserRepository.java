@@ -8,4 +8,7 @@ import com.lordsoftech.cdomanagment.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    org.springframework.security.core.userdetails.User findByUsername(String username);
+    org.springframework.security.core.userdetails.User findByEmail(String email);
+
 }

@@ -11,23 +11,26 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import javax.crypto.SecretKey;
-import javax.servlet.FilterChain;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authManager;
+    //private static SecretKey key;
+
 
     public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authManager = authenticationManager;
         setFilterProcessesUrl("/login");
+        //key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
 
-    @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
@@ -38,12 +41,20 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, Authentication authentication) {
-        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         String token = Jwts.builder()
                 .setSubject(((User) authentication.getPrincipal()).getEmail())
                 .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
-                .signWith(key)
+                //.signWith(getPublicKey())
+                .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".getBytes())
                 .compact();
         response.addHeader("Authorization","Bearer " + token);
     }
+
+//    public static SecretKey getPublicKey() {
+//        return key;
+//    }
+//
+//    public void generatePublicKey() {
+//        key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+//    }
 }
