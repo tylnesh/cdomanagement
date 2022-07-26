@@ -19,20 +19,16 @@ import com.lordsoftech.cdomanagment.repository.UserRepository;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    @Autowired
     private UserRepository repo;
-    // private BCryptPasswordEncoder bcrypter;
+    private BCryptPasswordEncoder bcrypter;
 
     @PostMapping("/registration")
     public void signUp(@RequestBody User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        //user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(bcrypter.encode(user.getPassword()));
         repo.save(user);
 
     }
 
-    // @GetMapping("")
-    // public List<User> getAll() {
-
-    // }
 
 }
