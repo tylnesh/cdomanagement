@@ -1,8 +1,11 @@
 package com.lordsoftech.cdomanagment.model;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,12 +25,17 @@ import lombok.Data;
 @Entity
 @Table(name = "users")
 @Data
-public class User implements GenericEntity<User> {
+@NoArgsConstructor
+@AllArgsConstructor
+public class AppUser implements GenericEntity<AppUser> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private long id;
+
+  @Column(columnDefinition = "varchar(255) default ''")
+  private String username;
 
   @Column(columnDefinition = "varchar(255) default ''")
   private String email;
@@ -50,12 +58,21 @@ public class User implements GenericEntity<User> {
 
   private boolean isVerified;
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "role_id", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="role_id")}  )
-  private List<Role> role;
+  private Collection<Role> roles = new ArrayList<>();
 
-  public User() {
 
+  public AppUser(String username, String email, String password) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+  }
+
+  public AppUser(String usernameOrEmail, String password) {
+    this.username = usernameOrEmail;
+    this.email = usernameOrEmail;
+    this.password = password;
   }
 
   @Override
@@ -64,15 +81,15 @@ public class User implements GenericEntity<User> {
   }
 
   @Override
-  public void update(User source) {
+  public void update(AppUser source) {
     this.setEmail(source.getEmail());
     this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
   }
 
   @Override
-  public User createNewInstance() {
-    User newInstance = new User();
+  public AppUser createNewInstance() {
+    AppUser newInstance = new AppUser();
     newInstance.update(this);
     return (newInstance);
   };

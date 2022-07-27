@@ -2,6 +2,7 @@ package com.lordsoftech.cdomanagment.cdomanagment;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.lordsoftech.cdomanagment.model.AppUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -11,31 +12,30 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
-import com.lordsoftech.cdomanagment.model.User;
-import com.lordsoftech.cdomanagment.repository.UserRepository;
+import com.lordsoftech.cdomanagment.repository.AppUserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
-public class UserRepositoryTests {
+public class AppAppUserRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
-    private UserRepository repo;
+    private AppUserRepository repo;
 
     @Test
     public void testCreateUser() {
-        User user = new User();
-        user.setEmail("testingUser@test.com");
-        user.setPassword(new BCryptPasswordEncoder().encode("blbeRandomHeslo"));
+        AppUser appUser = new AppUser();
+        appUser.setEmail("testingUser@test.com");
+        appUser.setPassword(new BCryptPasswordEncoder().encode("blbeRandomHeslo"));
 
-        User savedUser = repo.save(user);
-        User existUser = entityManager.find(User.class, savedUser.getId());
+        AppUser savedAppUser = repo.save(appUser);
+        AppUser existAppUser = entityManager.find(AppUser.class, savedAppUser.getId());
 
-        assertTrue(user.getEmail().equals(existUser.getEmail()));
-        assertTrue(user.getPassword().equals(existUser.getPassword()));
-        assertTrue(new BCryptPasswordEncoder().matches("blbeRandomHeslo", existUser.getPassword()));
+        assertTrue(appUser.getEmail().equals(existAppUser.getEmail()));
+        assertTrue(appUser.getPassword().equals(existAppUser.getPassword()));
+        assertTrue(new BCryptPasswordEncoder().matches("blbeRandomHeslo", existAppUser.getPassword()));
 
     }
 

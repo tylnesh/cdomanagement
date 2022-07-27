@@ -1,34 +1,64 @@
 package com.lordsoftech.cdomanagment.api;
 
+import com.lordsoftech.cdomanagment.model.AppUser;
+import com.lordsoftech.cdomanagment.model.Role;
+import com.lordsoftech.cdomanagment.model.RoleName;
+import com.lordsoftech.cdomanagment.service.AppUserService;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import com.lordsoftech.cdomanagment.repository.AppUserRepository;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lordsoftech.cdomanagment.model.User;
-import com.lordsoftech.cdomanagment.repository.UserRepository;
-
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequiredArgsConstructor
 public class UserController {
 
-    private UserRepository repo;
+    private final AppUserService userService;
+
+
     private BCryptPasswordEncoder bcrypter;
 
-    @PostMapping("/registration")
-    public void signUp(@RequestBody User user) {
-        //user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setPassword(bcrypter.encode(user.getPassword()));
-        repo.save(user);
-
+    @GetMapping("/user/all")
+    public ResponseEntity<List<AppUser>> getUsers() {
+        return ResponseEntity.ok().body(userService.getAppUsers());
     }
+
+
+    @PostMapping("/user/save")
+    public ResponseEntity<AppUser> saveUser(@RequestBody AppUser appUser) {
+        bcrypter = new BCryptPasswordEncoder();
+        appUser.setPassword(bcrypter.encode(appUser.getPassword()));
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveUser(appUser));
+    }
+    @PostMapping("/role/save")
+    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/role/save").toUriString());
+
+        return ResponseEntity.created(null).body(userService.saveRole(role));
+    }
+
+    @PostMapping("/role/addtouser")
+    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+        userService.addRoleToUser(form.getUsernameOrEmail(), form.getRoleName());
+        return ResponseEntity.ok().build();
+    }
+
+    @Data
+    class RoleToUserForm {
+        private String usernameOrEmail;
+        private String roleName;
+    }
+
 
 
 }
