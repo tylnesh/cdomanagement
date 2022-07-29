@@ -2,6 +2,7 @@ package com.lordsoftech.cdomanagment.api;
 
 import javax.validation.Valid;
 
+import com.lordsoftech.cdomanagment.service.GenericService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;

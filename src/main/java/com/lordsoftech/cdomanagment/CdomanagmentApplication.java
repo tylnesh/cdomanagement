@@ -1,8 +1,10 @@
 package com.lordsoftech.cdomanagment;
 
 import com.lordsoftech.cdomanagment.model.AppUser;
+import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.Role;
 import com.lordsoftech.cdomanagment.service.AppUserService;
+import com.lordsoftech.cdomanagment.service.DealerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +26,7 @@ public class CdomanagmentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AppUserService userService) {
+	CommandLineRunner run(AppUserService userService, DealerService dealerService) {
 		return args -> {
 			userService.saveRole(new Role("ROLE_USER"));
 			userService.saveRole(new Role("ROLE_DESIGNER"));
@@ -32,13 +34,18 @@ public class CdomanagmentApplication {
 			userService.saveRole(new Role("ROLE_ADMIN"));
 			userService.saveRole(new Role("ROLE_CUSTOMER"));
 
-			userService.saveUser(new AppUser("michal@kohutek.eu","19091992"));
+			userService.saveUser(new AppUser("it@moto-stylemx.com","msmx"));
 			userService.saveUser(new AppUser("test", "tester@gmail.com", "1234567890"));
 
-			userService.addRoleToUser("michal@kohutek.eu", "ROLE_ADMIN");
-			userService.addRoleToUser("michal@kohutek.eu", "ROLE_USER");
+			userService.addRoleToUser("it@moto-stylemx.com", "ROLE_ADMIN");
+			userService.addRoleToUser("it@moto-stylemx.com", "ROLE_USER");
 			userService.addRoleToUser("test", "ROLE_DEALER");
 			userService.addRoleToUser("test", "ROLE_DESIGNER");
+
+			dealerService.saveDealer(new Dealer("Moto-StyleMX","msmx"));
+			dealerService.saveDealer(new Dealer("FMR Factory", "slug"));
+
+
 		};
 	}
 

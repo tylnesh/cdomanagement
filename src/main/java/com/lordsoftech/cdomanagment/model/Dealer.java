@@ -42,6 +42,11 @@ public class Dealer implements GenericEntity<Dealer> {
     public Dealer() {
     }
 
+    public Dealer(String dealer, String slug) {
+        this.dealer = dealer;
+        this.slug = slug;
+    }
+
     @Override
     public Long getId() {
         return this.id;

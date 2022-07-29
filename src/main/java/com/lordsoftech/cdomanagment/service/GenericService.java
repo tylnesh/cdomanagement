@@ -1,4 +1,4 @@
-package com.lordsoftech.cdomanagment.api;
+package com.lordsoftech.cdomanagment.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
