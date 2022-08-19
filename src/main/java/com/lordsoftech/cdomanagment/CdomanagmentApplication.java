@@ -44,8 +44,6 @@ public class CdomanagmentApplication {
 
 			dealerService.saveDealer(new Dealer("Moto-StyleMX","msmx"));
 			dealerService.saveDealer(new Dealer("FMR Factory", "slug"));
-
-
 		};
 	}
 
