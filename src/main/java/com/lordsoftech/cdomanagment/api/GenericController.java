@@ -47,6 +47,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
         return ResponseEntity.ok(service.create(created));
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
         service.delete(id);
