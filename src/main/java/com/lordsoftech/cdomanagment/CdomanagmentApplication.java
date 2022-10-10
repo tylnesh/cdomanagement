@@ -45,7 +45,7 @@ public class CdomanagmentApplication {
 			userService.addRoleToUser("test", "ROLE_DESIGNER");
 
 			dealerService.saveDealer(new Dealer("Moto-StyleMX","msmx"));
-			dealerService.saveDealer(new Dealer("FMR Factory", "slug"));
+			dealerService.saveDealer(new Dealer("FMR Factory", "fmr"));
 		};
 	}
 
