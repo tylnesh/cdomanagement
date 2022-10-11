@@ -15,8 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
@@ -41,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.cors().and().authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.cors().and().authorizeRequests().antMatchers(POST, "/api/**").hasAnyAuthority("ROLE_ADMIN");
+        http.cors().and().authorizeRequests().antMatchers(PUT, "/api/**").hasAnyAuthority("ROLE_ADMIN");
+
         http.cors().and().authorizeRequests().anyRequest().authenticated();
         http.addFilter(cdoAuthenticationFilter);
         http.addFilterBefore(new CdoAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -37,7 +37,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
         return ResponseEntity.ok(service.get(id));
     }
 
-    @PutMapping("")
+    @PutMapping("/update")
     public ResponseEntity<T> update(@RequestBody @Valid T updated) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.update(updated));
     }
