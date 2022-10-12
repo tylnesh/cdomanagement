@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface DealerRepository extends GenericRepository<Dealer> {
     Dealer findByDealer(String dealer);
     Dealer findBySlug(String slug);
-
 }

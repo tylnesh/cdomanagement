@@ -2,6 +2,7 @@ package com.lordsoftech.cdomanagment.api;
 
 import com.lordsoftech.cdomanagment.ResourceNotFoundException;
 import com.lordsoftech.cdomanagment.model.Dealer;
+import com.lordsoftech.cdomanagment.model.DealerList;
 import com.lordsoftech.cdomanagment.repository.DealerRepository;
 import com.lordsoftech.cdomanagment.service.DealerService;
 import com.lordsoftech.cdomanagment.service.DealerServiceImpl;
@@ -25,8 +26,8 @@ public class DealerController extends GenericController<Dealer> {
         };
     }
 
-    @PutMapping("/update-multi")
-    public ResponseEntity<Dealer> updateMulti(@RequestBody @Valid List<Dealer> updated) throws ResourceNotFoundException {
+    @PutMapping("/update/multi")
+    public ResponseEntity<Integer> updateMulti(@RequestBody @Valid DealerList updated) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.updateMultipleDealers(updated));
     }
 //    @Override
