@@ -34,20 +34,13 @@ public class DealerServiceImpl implements DealerService {
         } else return null;
     }
 
-    //TODO: Implement searching by ID and updating one by one
     public int updateMultipleDealers(DealerList updated) {
-//        System.out.println(updated.getDealerList().get(0));
         List<Dealer> dbDomain = new ArrayList<>();
         updated.getDealerList().forEach((updatedDealer) -> {
                 dbDomain.add(getDealer(updatedDealer.getId()));
                 dbDomain.get(dbDomain.size()-1).update(updatedDealer);
         });
 
-//        List<Dealer> dbDomain = new ArrayList<>();
-//        for (int i = 0; i< updated.getDealerList().size(); i++) {
-//            dbDomain.add(getDealer(updated.getDealerList().get(i).getDealer()));
-//            dbDomain.get(i).update(updated.getDealerList().get(i));
-//        }
         repository.saveAll(dbDomain);
         return updated.getDealerList().size();
 
