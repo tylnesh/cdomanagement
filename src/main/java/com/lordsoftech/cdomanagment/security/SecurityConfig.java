@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.cors().and().authorizeRequests().antMatchers(POST, "/api/**").hasAnyAuthority("ROLE_ADMIN");
         http.cors().and().authorizeRequests().antMatchers(PUT, "/api/**").hasAnyAuthority("ROLE_ADMIN");
+        http.cors().and().authorizeRequests().antMatchers(DELETE, "/api/**").hasAnyAuthority("ROLE_ADMIN");
 
         http.cors().and().authorizeRequests().anyRequest().authenticated();
         http.addFilter(cdoAuthenticationFilter);

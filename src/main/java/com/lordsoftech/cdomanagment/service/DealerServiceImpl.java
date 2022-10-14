@@ -43,8 +43,17 @@ public class DealerServiceImpl implements DealerService {
 
         repository.saveAll(dbDomain);
         return updated.getDealerList().size();
-
     };
+
+    public int deleteMultipleDealers(DealerList deleted) {
+        List<Dealer> dbDomain = new ArrayList<>();
+        deleted.getDealerList().forEach((deletedDealer) -> {
+            dbDomain.add(getDealer(deletedDealer.getId()));
+        });
+        repository.deleteAll(dbDomain);
+        return dbDomain.size();
+    };
+
 
 
     @Override
