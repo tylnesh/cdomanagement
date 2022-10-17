@@ -10,6 +10,6 @@ public interface DealerService {
     Dealer getDealer(String dealer);
     Dealer getDealer(Long id);
     DealerList getDealers();
-    int updateDealers(DealerList updated);
-    int deleteDealers(DealerList deleted);
+    Integer updateDealers(DealerList updated);
+    Integer deleteDealers(DealerList deleted);
 }

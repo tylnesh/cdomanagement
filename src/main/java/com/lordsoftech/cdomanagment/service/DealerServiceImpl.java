@@ -40,7 +40,7 @@ public class DealerServiceImpl implements DealerService {
     }
 
     @Override
-    public int updateDealers(DealerList updated) {
+    public Integer updateDealers(DealerList updated) {
         List<Dealer> dbDomain = new ArrayList<>();
         updated.getDealerList().forEach((updatedDealer) -> {
                 dbDomain.add(getDealer(updatedDealer.getId()));
@@ -52,7 +52,7 @@ public class DealerServiceImpl implements DealerService {
     };
 
     @Override
-    public int deleteDealers(DealerList deleted) {
+    public Integer deleteDealers(DealerList deleted) {
         List<Dealer> dbDomain = new ArrayList<>();
         deleted.getDealerList().forEach((deletedDealer) -> {
             dbDomain.add(getDealer(deletedDealer.getId()));

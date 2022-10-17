@@ -2,9 +2,11 @@ package com.lordsoftech.cdomanagment;
 
 import com.lordsoftech.cdomanagment.model.AppUser;
 import com.lordsoftech.cdomanagment.model.Dealer;
+import com.lordsoftech.cdomanagment.model.Printer;
 import com.lordsoftech.cdomanagment.model.Role;
 import com.lordsoftech.cdomanagment.service.AppUserService;
 import com.lordsoftech.cdomanagment.service.DealerService;
+import com.lordsoftech.cdomanagment.service.PrinterService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +30,7 @@ public class CdomanagmentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AppUserService userService, DealerService dealerService) {
+	CommandLineRunner run(AppUserService userService, DealerService dealerService, PrinterService printerService) {
 		return args -> {
 			userService.saveRole(new Role("ROLE_USER"));
 			userService.saveRole(new Role("ROLE_DESIGNER"));
@@ -46,6 +48,9 @@ public class CdomanagmentApplication {
 
 			dealerService.saveDealer(new Dealer("Moto-StyleMX","msmx"));
 			dealerService.saveDealer(new Dealer("FMR Factory", "fmr"));
+
+			printerService.savePrinter(new Printer("NEW"));
+			printerService.savePrinter(new Printer("OLD"));
 		};
 	}
 

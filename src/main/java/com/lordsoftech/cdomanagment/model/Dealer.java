@@ -41,6 +41,10 @@ public class Dealer implements GenericEntity<Dealer> {
     public Dealer() {
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
     public Dealer(String dealer, String slug) {
         this.dealer = dealer;
         this.slug = slug;
