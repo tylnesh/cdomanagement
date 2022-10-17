@@ -1,8 +1,5 @@
 package com.lordsoftech.cdomanagment.repository;
-
-import com.lordsoftech.cdomanagment.model.AppUser;
 import com.lordsoftech.cdomanagment.model.Dealer;
-
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -34,7 +34,13 @@ public class DealerServiceImpl implements DealerService {
         } else return null;
     }
 
-    public int updateMultipleDealers(DealerList updated) {
+    @Override
+    public DealerList getDealers() {
+        return null;
+    }
+
+    @Override
+    public int updateDealers(DealerList updated) {
         List<Dealer> dbDomain = new ArrayList<>();
         updated.getDealerList().forEach((updatedDealer) -> {
                 dbDomain.add(getDealer(updatedDealer.getId()));
@@ -45,7 +51,8 @@ public class DealerServiceImpl implements DealerService {
         return updated.getDealerList().size();
     };
 
-    public int deleteMultipleDealers(DealerList deleted) {
+    @Override
+    public int deleteDealers(DealerList deleted) {
         List<Dealer> dbDomain = new ArrayList<>();
         deleted.getDealerList().forEach((deletedDealer) -> {
             dbDomain.add(getDealer(deletedDealer.getId()));
@@ -53,11 +60,4 @@ public class DealerServiceImpl implements DealerService {
         repository.deleteAll(dbDomain);
         return dbDomain.size();
     };
-
-
-
-    @Override
-    public List<Dealer> getDealers() {
-        return null;
-    }
 }

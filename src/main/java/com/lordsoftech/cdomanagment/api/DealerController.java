@@ -24,12 +24,12 @@ public class DealerController extends GenericController<Dealer> {
 
     @PutMapping("/update/multi")
     public ResponseEntity<Integer> updateMulti(@RequestBody @Valid DealerList updated) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.updateMultipleDealers(updated));
+        return ResponseEntity.ok(service.updateDealers(updated));
     }
 
     @DeleteMapping("/delete/multi")
     public ResponseEntity<Integer> deleteMulti(@RequestBody @Valid DealerList deleted) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.deleteMultipleDealers(deleted));
+        return ResponseEntity.ok(service.deleteDealers(deleted));
     }
 
 }

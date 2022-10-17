@@ -1,61 +1,55 @@
 package com.lordsoftech.cdomanagment.model;
 
-import java.sql.Timestamp;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "dealers")
+@Table(name = "printers")
 @Data
-public class Dealer implements GenericEntity<Dealer> {
+public class Printer implements GenericEntity<Printer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+    private Long id;
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String dealer;
-
-    @Column(columnDefinition = "varchar(10) default ''")
-    private String slug;
+    private String printer;
 
     @CreationTimestamp
     @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp createdAt;
+
     @UpdateTimestamp
     @Column(name = "updatedAt", columnDefinition = "timestamp default current_timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Europe/Berlin")
     private java.sql.Timestamp updatedAt;
 
-    public Dealer() {
+    public Printer() {
+
     }
 
-    public Dealer(String dealer, String slug) {
-        this.dealer = dealer;
-        this.slug = slug;
+    public Printer(String printer) {
+        this.printer = printer;
     }
+
+
 
     @Override
-    public void update(Dealer source) {
-        this.setDealer(source.getDealer());
-        this.setSlug(source.getSlug());
+    public void update(Printer source) {
+        this.setPrinter( source.getPrinter());
         this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
     }
 
     @Override
-    public Dealer createNewInstance() {
-        Dealer newInstance = new Dealer();
+    public Printer createNewInstance() {
+        Printer newInstance = new Printer();
         newInstance.update(this);
         return newInstance;
     }
