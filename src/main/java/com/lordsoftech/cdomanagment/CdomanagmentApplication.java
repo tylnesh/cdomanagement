@@ -46,8 +46,30 @@ public class CdomanagmentApplication {
 			userService.addRoleToUser("test", "ROLE_DEALER");
 			userService.addRoleToUser("test", "ROLE_DESIGNER");
 
-			dealerService.saveDealer(new Dealer("Moto-StyleMX","msmx"));
-			dealerService.saveDealer(new Dealer("FMR Factory", "fmr"));
+			dealerService.saveDealer(new Dealer("Testing 1","t1"));
+			dealerService.saveDealer(new Dealer("Testing 2","t2"));
+			dealerService.saveDealer(new Dealer("Testing 3","t3"));
+			dealerService.saveDealer(new Dealer("Testing 4","t4"));
+			dealerService.saveDealer(new Dealer("Testing 5","t5"));
+			dealerService.saveDealer(new Dealer("Testing 6","t6"));
+			dealerService.saveDealer(new Dealer("Testing 7","t7"));
+			dealerService.saveDealer(new Dealer("Testing 8","t8"));
+			dealerService.saveDealer(new Dealer("Testing 9","t9"));
+			dealerService.saveDealer(new Dealer("Testing 10", "t10"));
+			dealerService.saveDealer(new Dealer("Testing 11", "t11"));
+			dealerService.saveDealer(new Dealer("Testing 12", "t12"));
+			dealerService.saveDealer(new Dealer("Testing 13", "t13"));
+			dealerService.saveDealer(new Dealer("Testing 14", "t14"));
+			dealerService.saveDealer(new Dealer("Testing 15", "t15"));
+			dealerService.saveDealer(new Dealer("Testing 16", "t16"));
+			dealerService.saveDealer(new Dealer("Testing 17", "t17"));
+			dealerService.saveDealer(new Dealer("Testing 18", "t18"));
+			dealerService.saveDealer(new Dealer("Testing 19", "t19"));
+			dealerService.saveDealer(new Dealer("Testing 20", "t20"));
+			dealerService.saveDealer(new Dealer("Testing 21", "t21"));
+			dealerService.saveDealer(new Dealer("Testing 22", "t22"));
+			dealerService.saveDealer(new Dealer("Testing 23", "t23"));
+
 
 			printerService.savePrinter(new Printer("NEW"));
 			printerService.savePrinter(new Printer("OLD"));

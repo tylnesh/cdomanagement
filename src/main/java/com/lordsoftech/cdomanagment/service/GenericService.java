@@ -29,7 +29,6 @@ public abstract class GenericService<T extends GenericEntity<T>> {
     public T update(T updated) throws ResourceNotFoundException {
         T dbDomain = get(updated.getId());
         dbDomain.update(updated);
-
         return repository.save(dbDomain);
     }
 

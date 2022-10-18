@@ -29,6 +29,7 @@ public abstract class GenericController<T extends GenericEntity<T>> {
 
     @GetMapping("")
     public ResponseEntity<Page<T>> getPage(Pageable pageable) {
+
         return ResponseEntity.ok(service.getPage(pageable));
     }
 
