@@ -5,10 +5,13 @@ import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
 import com.lordsoftech.cdomanagment.repository.DealerRepository;
 import com.lordsoftech.cdomanagment.service.DealerServiceImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/dealer")
@@ -30,6 +33,11 @@ public class DealerController extends GenericController<Dealer> {
     @DeleteMapping("/delete/multi")
     public ResponseEntity<Integer> deleteMulti(@RequestBody @Valid DealerList deleted) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.deleteDealers(deleted));
+    }
+
+    @GetMapping("/search/")
+    public ResponseEntity<List<Dealer>> getSearchPage(@RequestBody @Valid Dealer searched) {
+        return ResponseEntity.ok(service.searchDealers(searched));
     }
 
 }

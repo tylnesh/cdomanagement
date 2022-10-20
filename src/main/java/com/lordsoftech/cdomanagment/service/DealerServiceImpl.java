@@ -4,6 +4,7 @@ import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
 import com.lordsoftech.cdomanagment.repository.DealerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -60,4 +61,9 @@ public class DealerServiceImpl implements DealerService {
         repository.deleteAll(dbDomain);
         return dbDomain.size();
     };
+
+    @Override
+    public List<Dealer> searchDealers(Dealer searched) {
+        return repository.findDealersByDealerContainingIgnoreCaseOrSlugContainingIgnoreCase(searched.getDealer(), searched.getSlug());
+    }
 }
