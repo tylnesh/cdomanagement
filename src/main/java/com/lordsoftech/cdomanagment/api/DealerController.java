@@ -35,7 +35,7 @@ public class DealerController extends GenericController<Dealer> {
         return ResponseEntity.ok(service.deleteDealers(deleted));
     }
 
-    @GetMapping("/search/")
+    @PostMapping("/search")
     public ResponseEntity<List<Dealer>> getSearchPage(@RequestBody @Valid Dealer searched) {
         return ResponseEntity.ok(service.searchDealers(searched));
     }
