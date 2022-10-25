@@ -2,7 +2,6 @@ package com.lordsoftech.cdomanagment.service;
 
 import com.lordsoftech.cdomanagment.model.AppUser;
 import com.lordsoftech.cdomanagment.model.Role;
-import com.lordsoftech.cdomanagment.model.RoleName;
 
 import java.util.List;
 
