@@ -5,8 +5,7 @@ import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
 import com.lordsoftech.cdomanagment.repository.DealerRepository;
 import com.lordsoftech.cdomanagment.service.DealerServiceImpl;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +20,7 @@ public class DealerController extends GenericController<Dealer> {
     private final DealerServiceImpl service;
     public DealerController(DealerRepository repo) {
         super(repo);
-        this.service = new DealerServiceImpl(repo) {
-        };
+        this.service = new DealerServiceImpl(repo);
     }
 
     @PutMapping("/update/multi")
