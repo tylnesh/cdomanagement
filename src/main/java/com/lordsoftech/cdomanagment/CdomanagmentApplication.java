@@ -48,7 +48,7 @@ public class CdomanagmentApplication {
 
 			for (int i = 0; i< 25; i++) {
 				dealerService.saveDealer(new Dealer(RandomString.make(8), "d" + Integer.toString(i)));
-				short year = (short) (1990 + (short) (Math.random() * 2022));
+				short year = (short) (1990 + (short) (Math.random() * 30));
 				modelService.saveModel(new Model(RandomString.make(4), RandomString.make(4), year, (short) (year + i)));
 			}
 			printerService.savePrinter(new Printer("NEW"));
