@@ -3,6 +3,8 @@ package com.lordsoftech.cdomanagment.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +13,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "models")
 @Data
-public class BikeModel implements GenericEntity<BikeModel> {
+@NoArgsConstructor
+public class Model implements GenericEntity<Model> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
@@ -38,7 +41,7 @@ public class BikeModel implements GenericEntity<BikeModel> {
     }
 
     @Override
-    public void update(BikeModel source) {
+    public void update(Model source) {
         this.setManufacturer(source.getManufacturer());
         this.setModel(source.getModel());
         this.setYearFrom(source.getYearFrom());
@@ -46,9 +49,15 @@ public class BikeModel implements GenericEntity<BikeModel> {
         this.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
     }
     @Override
-    public BikeModel createNewInstance() {
-        BikeModel newInstance = new BikeModel();
+    public Model createNewInstance() {
+        Model newInstance = new Model();
         newInstance.update(this);
         return newInstance;
+    }
+    public Model(String manufacturer, String model, short yearFrom, short yearTo) {
+       this.setManufacturer(manufacturer);
+       this.setModel(model);
+       this.setYearFrom(yearFrom);
+       this.setYearTo(yearTo);
     }
 }
