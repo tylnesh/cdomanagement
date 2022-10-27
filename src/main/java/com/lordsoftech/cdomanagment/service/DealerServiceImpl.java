@@ -4,7 +4,6 @@ import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
 import com.lordsoftech.cdomanagment.repository.DealerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,19 +42,19 @@ public class DealerServiceImpl implements DealerService {
     @Override
     public Integer updateDealers(DealerList updated) {
         List<Dealer> dbDomain = new ArrayList<>();
-        updated.getDealerList().forEach((updatedDealer) -> {
+        updated.getList().forEach((updatedDealer) -> {
                 dbDomain.add(getDealer(updatedDealer.getId()));
                 dbDomain.get(dbDomain.size()-1).update(updatedDealer);
         });
 
         repository.saveAll(dbDomain);
-        return updated.getDealerList().size();
+        return updated.getList().size();
     };
 
     @Override
     public Integer deleteDealers(DealerList deleted) {
         List<Dealer> dbDomain = new ArrayList<>();
-        deleted.getDealerList().forEach((deletedDealer) -> {
+        deleted.getList().forEach((deletedDealer) -> {
             dbDomain.add(getDealer(deletedDealer.getId()));
         });
         repository.deleteAll(dbDomain);
@@ -63,7 +62,7 @@ public class DealerServiceImpl implements DealerService {
     };
 
     @Override
-    public List<Dealer> searchDealers(Dealer searched) {
+    public DealerList searchDealers(Dealer searched) {
         return repository.findDealersByDealerContainingIgnoreCaseOrSlugContainingIgnoreCase(searched.getDealer(), searched.getSlug());
     }
 }

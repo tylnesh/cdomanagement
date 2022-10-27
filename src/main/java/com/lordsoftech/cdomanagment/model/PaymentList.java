@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class PrinterList {
-    private List<Printer> list;
+public class PaymentList {
+    private List<Payment> list;
 
 }

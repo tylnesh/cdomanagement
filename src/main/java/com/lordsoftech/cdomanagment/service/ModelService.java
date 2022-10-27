@@ -11,7 +11,7 @@ public interface ModelService {
     Model getModel(Long id);
     Integer updateModels(ModelList updated);
     Integer deleteModels(ModelList deleted);
-    List<Model> searchModels(Model searched);
+    ModelList searchModels(Model searched);
 
 
 }

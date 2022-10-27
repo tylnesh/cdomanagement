@@ -13,6 +13,5 @@ public interface DealerService {
     DealerList getDealers();
     Integer updateDealers(DealerList updated);
     Integer deleteDealers(DealerList deleted);
-
-    List<Dealer> searchDealers(Dealer searched);
+    DealerList searchDealers(Dealer searched);
 }

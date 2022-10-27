@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ModelList {
-    private List<Model> modelList;
+    private List<Model> list;
 
 }

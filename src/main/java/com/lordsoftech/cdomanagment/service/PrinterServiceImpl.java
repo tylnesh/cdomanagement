@@ -1,7 +1,7 @@
 package com.lordsoftech.cdomanagment.service;
 
-import com.lordsoftech.cdomanagment.model.Dealer;
-import com.lordsoftech.cdomanagment.model.DealerList;
+import com.lordsoftech.cdomanagment.model.Model;
+import com.lordsoftech.cdomanagment.model.ModelList;
 import com.lordsoftech.cdomanagment.model.Printer;
 import com.lordsoftech.cdomanagment.model.PrinterList;
 import com.lordsoftech.cdomanagment.repository.PrinterRepository;
@@ -34,7 +34,7 @@ public class PrinterServiceImpl implements PrinterService {
     @Override
     public Integer updatePrinters(PrinterList updated) {
         List<Printer> dbDomain = new ArrayList<>();
-        updated.getPrinterList().forEach((updatedPrinter) -> {
+        updated.getList().forEach((updatedPrinter) -> {
             dbDomain.add(getPrinter(updatedPrinter.getId()));
             dbDomain.get(dbDomain.size()-1).update(updatedPrinter);
         });
@@ -46,10 +46,19 @@ public class PrinterServiceImpl implements PrinterService {
     @Override
     public Integer deletePrinters(PrinterList deleted) {
         List<Printer> dbDomain = new ArrayList<>();
-        deleted.getPrinterList().forEach((deletedPrinter) -> {
+        deleted.getList().forEach((deletedPrinter) -> {
             dbDomain.add(getPrinter(deletedPrinter.getId()));
         });
         repository.deleteAll(dbDomain);
         return dbDomain.size();
     };
+
+    @Override
+    public PrinterList searchPrinters(Printer searched) {
+        List<Printer> dbDomain = new ArrayList<>();
+        dbDomain.addAll(repository.findAllByPrinter(searched.getPrinter()));
+        PrinterList list = new PrinterList();
+        list.setList(dbDomain);
+        return list;
+    }
 }

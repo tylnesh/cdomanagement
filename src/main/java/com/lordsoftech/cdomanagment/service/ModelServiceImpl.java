@@ -31,9 +31,9 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Integer updateModels(ModelList updated) {
         List<Model> dbDomain = new ArrayList<>();
-        updated.getModelList().forEach((updatedDealer) -> {
-            dbDomain.add(getModel(updatedDealer.getId()));
-            dbDomain.get(dbDomain.size()-1).update(updatedDealer);
+        updated.getList().forEach((updatedItem) -> {
+            dbDomain.add(getModel(updatedItem.getId()));
+            dbDomain.get(dbDomain.size()-1).update(updatedItem);
         });
         repository.saveAll(dbDomain);
         return dbDomain.size();
@@ -42,20 +42,22 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Integer deleteModels(ModelList deleted) {
         List<Model> dbDomain = new ArrayList<>();
-        deleted.getModelList().forEach((deletedDealer) -> {
-            dbDomain.add(getModel(deletedDealer.getId()));
+        deleted.getList().forEach((deletedItem) -> {
+            dbDomain.add(getModel(deletedItem.getId()));
         });
         repository.deleteAll(dbDomain);
         return dbDomain.size();
     }
 
     @Override
-    public List<Model> searchModels(Model searched) {
+    public ModelList searchModels(Model searched) {
         List<Model> dbDomain = new ArrayList<>();
         dbDomain.addAll(repository.findAllByModelContainingIgnoreCase(searched.getModel()));
         dbDomain.addAll(repository.findAllByManufacturerContainingIgnoreCase(searched.getManufacturer()));
         dbDomain.addAll(repository.findAllByYearFrom(searched.getYearFrom()));
         dbDomain.addAll(repository.findAllByYearTo(searched.getYearTo()));
-        return dbDomain;
+        ModelList list = new ModelList();
+        list.setList(dbDomain);
+        return list;
     }
 }

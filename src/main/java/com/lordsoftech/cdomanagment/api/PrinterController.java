@@ -2,6 +2,8 @@ package com.lordsoftech.cdomanagment.api;
 
 import com.lordsoftech.cdomanagment.ResourceNotFoundException;
 
+import com.lordsoftech.cdomanagment.model.Model;
+import com.lordsoftech.cdomanagment.model.ModelList;
 import com.lordsoftech.cdomanagment.model.Printer;
 import com.lordsoftech.cdomanagment.model.PrinterList;
 import com.lordsoftech.cdomanagment.repository.PrinterRepository;
@@ -31,6 +33,11 @@ public class PrinterController extends GenericController<Printer> {
     @DeleteMapping("/delete/multi")
     public ResponseEntity<Integer> deleteMulti(@RequestBody @Valid PrinterList deleted) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.deletePrinters(deleted));
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<PrinterList> getSearchPage(@RequestBody @Valid Printer searched) {
+        return ResponseEntity.ok(service.searchPrinters(searched));
     }
 
 }

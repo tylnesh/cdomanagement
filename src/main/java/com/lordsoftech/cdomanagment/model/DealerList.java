@@ -1,15 +1,14 @@
 package com.lordsoftech.cdomanagment.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class DealerList {
-    private List<Dealer> dealerList;
+    private List<Dealer> list;
 
-    public DealerList() {
-        dealerList = new ArrayList<>();
-    }
 }
