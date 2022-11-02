@@ -1,10 +1,7 @@
 package com.lordsoftech.cdomanagment;
 
 import com.lordsoftech.cdomanagment.model.*;
-import com.lordsoftech.cdomanagment.service.AppUserService;
-import com.lordsoftech.cdomanagment.service.DealerService;
-import com.lordsoftech.cdomanagment.service.ModelService;
-import com.lordsoftech.cdomanagment.service.PrinterService;
+import com.lordsoftech.cdomanagment.service.*;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +26,7 @@ public class CdomanagmentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AppUserService userService, DealerService dealerService, PrinterService printerService, ModelService modelService) {
+	CommandLineRunner run(AppUserService userService, DealerService dealerService, PrinterService printerService, ModelService modelService, PaymentService paymentService, StatusService statusService) {
 		return args -> {
 			userService.saveRole(new Role("ROLE_USER"));
 			userService.saveRole(new Role("ROLE_DESIGNER"));
@@ -53,6 +50,21 @@ public class CdomanagmentApplication {
 			}
 			printerService.savePrinter(new Printer("NEW"));
 			printerService.savePrinter(new Printer("OLD"));
+
+			paymentService.savePayment(new Payment("PayPal"));
+			paymentService.savePayment(new Payment("Credit Card"));
+			paymentService.savePayment(new Payment("Bank Transfer"));
+			paymentService.savePayment(new Payment("Firstborn son"));
+
+			statusService.saveStatus(new Status("None", "#FFFFFF"));
+			statusService.saveStatus(new Status("Approved for production", "#00FFFF"));
+			statusService.saveStatus(new Status("EPS DONE", "#FFFF00"));
+			statusService.saveStatus(new Status("Printed", "#00FF00"));
+			statusService.saveStatus(new Status("Package complete", "#d3d3d3"));
+			statusService.saveStatus(new Status("Archived", "#FFFFFF"));
+			statusService.saveStatus(new Status("Hold", "#FF0000"));
+			statusService.saveStatus(new Status("Upstairs", "#0000FF"));
+
 		};
 	}
 
