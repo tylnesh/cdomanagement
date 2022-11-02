@@ -2,9 +2,6 @@ package com.lordsoftech.cdomanagment.service;
 
 import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface DealerService {
     Dealer saveDealer(Dealer dealer);
