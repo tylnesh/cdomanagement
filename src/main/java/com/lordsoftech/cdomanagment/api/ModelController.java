@@ -3,6 +3,8 @@ package com.lordsoftech.cdomanagment.api;
 import com.lordsoftech.cdomanagment.ResourceNotFoundException;
 import com.lordsoftech.cdomanagment.model.Model;
 import com.lordsoftech.cdomanagment.model.ModelList;
+import com.lordsoftech.cdomanagment.repository.DealerRepository;
+import com.lordsoftech.cdomanagment.repository.DesignRepository;
 import com.lordsoftech.cdomanagment.repository.ModelRepository;
 import com.lordsoftech.cdomanagment.service.ModelServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,9 @@ public class ModelController extends GenericController<Model> {
 
     public final ModelServiceImpl service;
 
-    public ModelController(ModelRepository repo) {
-        super(repo);
-        this.service = new ModelServiceImpl(repo);
+    public ModelController(ModelRepository modelRepository, DesignRepository designRepository) {
+        super(modelRepository);
+        this.service = new ModelServiceImpl(modelRepository, designRepository);
     }
 
     @PutMapping("/update/multi")

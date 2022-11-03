@@ -1,11 +1,14 @@
 package com.lordsoftech.cdomanagment.service;
 
-import com.lordsoftech.cdomanagment.model.Dealer;
+import com.lordsoftech.cdomanagment.model.Design;
 import com.lordsoftech.cdomanagment.model.Model;
 import com.lordsoftech.cdomanagment.model.ModelList;
+import com.lordsoftech.cdomanagment.repository.DesignRepository;
 import com.lordsoftech.cdomanagment.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +16,23 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
+@Transactional
+
 public class ModelServiceImpl implements ModelService {
-    private final ModelRepository repository;
+    private final ModelRepository modelRepository;
+    private final DesignRepository designRepository;
+
+
 
     @Override
     public Model saveModel(Model model) {
-        return repository.save(model);
+        return modelRepository.save(model);
     }
 
     @Override
     public Model getModel(Long id) {
-        Optional<Model> model = repository.findById(id);
+        Optional<Model> model = modelRepository.findById(id);
         if (model.isPresent()) return model.get();
         return null;
     }
@@ -35,7 +44,7 @@ public class ModelServiceImpl implements ModelService {
             dbDomain.add(getModel(updatedItem.getId()));
             dbDomain.get(dbDomain.size()-1).update(updatedItem);
         });
-        repository.saveAll(dbDomain);
+        modelRepository.saveAll(dbDomain);
         return dbDomain.size();
     }
 
@@ -45,19 +54,30 @@ public class ModelServiceImpl implements ModelService {
         deleted.getList().forEach((deletedItem) -> {
             dbDomain.add(getModel(deletedItem.getId()));
         });
-        repository.deleteAll(dbDomain);
+        modelRepository.deleteAll(dbDomain);
         return dbDomain.size();
     }
 
     @Override
     public ModelList searchModels(Model searched) {
         List<Model> dbDomain = new ArrayList<>();
-        dbDomain.addAll(repository.findAllByModelContainingIgnoreCase(searched.getModel()));
-        dbDomain.addAll(repository.findAllByManufacturerContainingIgnoreCase(searched.getManufacturer()));
-        dbDomain.addAll(repository.findAllByYearFrom(searched.getYearFrom()));
-        dbDomain.addAll(repository.findAllByYearTo(searched.getYearTo()));
+        dbDomain.addAll(modelRepository.findAllByModelContainingIgnoreCase(searched.getModel()));
+        dbDomain.addAll(modelRepository.findAllByManufacturerContainingIgnoreCase(searched.getManufacturer()));
+        dbDomain.addAll(modelRepository.findAllByYearFrom(searched.getYearFrom()));
+        dbDomain.addAll(modelRepository.findAllByYearTo(searched.getYearTo()));
         ModelList list = new ModelList();
         list.setList(dbDomain);
         return list;
+    }
+
+    @Override
+    public void linkDesignModel(Model pairModel, Design pairDesign) {
+        log.info("Linking model {} and design {}", pairModel, pairDesign);
+        Optional<Model> model = modelRepository.findById(pairModel.getId());
+        Optional<Design> design = designRepository.findById(pairDesign.getId());
+        if (model.isPresent() && design.isPresent()) {
+            model.get().getDesigns().add(design.get());
+            design.get().getModels().add(model.get());
+        }
     }
 }

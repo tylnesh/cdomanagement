@@ -1,5 +1,6 @@
 package com.lordsoftech.cdomanagment.service;
 
+import com.lordsoftech.cdomanagment.model.Design;
 import com.lordsoftech.cdomanagment.model.Model;
 import com.lordsoftech.cdomanagment.model.ModelList;
 
@@ -12,6 +13,9 @@ public interface ModelService {
     Integer updateModels(ModelList updated);
     Integer deleteModels(ModelList deleted);
     ModelList searchModels(Model searched);
+
+    void linkDesignModel(Model model, Design design);
+
 
 
 }

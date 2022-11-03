@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "models")
@@ -25,6 +26,9 @@ public class Model implements GenericEntity<Model> {
     private String model;
 
     private short yearFrom, yearTo;
+
+    @ManyToMany
+    Set<Design> designs;
 
     @CreationTimestamp
     @Column(name = "createdAt", columnDefinition = "timestamp default current_timestamp")
