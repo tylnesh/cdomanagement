@@ -26,7 +26,7 @@ public class CdomanagmentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AppUserService userService, DealerService dealerService, PrinterService printerService, ModelService modelService, PaymentService paymentService, StatusService statusService) {
+	CommandLineRunner run(AppUserService userService, DesignService designService, DealerService dealerService, PrinterService printerService, ModelService modelService, PaymentService paymentService, StatusService statusService) {
 		return args -> {
 			userService.saveRole(new Role("ROLE_USER"));
 			userService.saveRole(new Role("ROLE_DESIGNER"));
@@ -46,6 +46,8 @@ public class CdomanagmentApplication {
 			for (int i = 0; i< 25; i++) {
 				dealerService.saveDealer(new Dealer(RandomString.make(8), "d" + Integer.toString(i)));
 				short year = (short) (1990 + (short) (Math.random() * 30));
+				designService.saveDesign(new Design(RandomString.make(4), "/files/images"+RandomString.make(4)+".png"));
+
 				modelService.saveModel(new Model(RandomString.make(4), RandomString.make(4), year, (short) (year + i)));
 			}
 			printerService.savePrinter(new Printer("NEW"));

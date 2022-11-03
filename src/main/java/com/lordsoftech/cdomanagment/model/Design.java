@@ -2,22 +2,30 @@ package com.lordsoftech.cdomanagment.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "designs")
 @Data
+@RequiredArgsConstructor
 public class Design implements GenericEntity<Design> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
-
     @Column(columnDefinition = "varchar(255) default ''")
     private String design;
     @Column(columnDefinition = "varchar(255) default ''")
     private String pathToImage;
+
+    @ManyToMany
+    private Set<Model> models;
+
+
 
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -50,5 +58,11 @@ public class Design implements GenericEntity<Design> {
     @Override
     public Timestamp getUpdatedAt() {
         return this.updatedAt;
+    }
+
+    public Design(String design, String pathToImage) {
+        this.design = design;
+        this.pathToImage = pathToImage;
+        this.models = new HashSet<>();
     }
 }
