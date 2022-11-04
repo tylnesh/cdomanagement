@@ -47,7 +47,6 @@ public class CdomanagmentApplication {
 				dealerService.saveDealer(new Dealer(RandomString.make(8), "d" + Integer.toString(i)));
 				short year = (short) (1990 + (short) (Math.random() * 30));
 				designService.saveDesign(new Design(RandomString.make(4), "/files/images"+RandomString.make(4)+".png"));
-
 				modelService.saveModel(new Model(RandomString.make(4), RandomString.make(4), year, (short) (year + i)));
 			}
 			printerService.savePrinter(new Printer("NEW"));
@@ -66,6 +65,9 @@ public class CdomanagmentApplication {
 			statusService.saveStatus(new Status("Archived", "#FFFFFF"));
 			statusService.saveStatus(new Status("Hold", "#FF0000"));
 			statusService.saveStatus(new Status("Upstairs", "#0000FF"));
+
+			//designService.linkDesignModel(designService.getDesign((long) 1), modelService.getModel((long) 1));
+
 
 		};
 	}
