@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/printer")
@@ -36,7 +37,7 @@ public class PrinterController extends GenericController<Printer> {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<PrinterList> getSearchPage(@RequestBody @Valid Printer searched) {
+    public ResponseEntity<List<Printer>> getSearchPage(@RequestBody @Valid Printer searched) {
         return ResponseEntity.ok(service.searchPrinters(searched));
     }
 

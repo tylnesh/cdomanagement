@@ -54,11 +54,7 @@ public class PrinterServiceImpl implements PrinterService {
     };
 
     @Override
-    public PrinterList searchPrinters(Printer searched) {
-        List<Printer> dbDomain = new ArrayList<>();
-        dbDomain.addAll(repository.findAllByPrinter(searched.getPrinter()));
-        PrinterList list = new PrinterList();
-        list.setList(dbDomain);
-        return list;
+    public List<Printer> searchPrinters(Printer searched) {
+        return repository.findAllByPrinter(searched.getPrinter());
     }
 }

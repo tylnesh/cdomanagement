@@ -1,7 +1,5 @@
 package com.lordsoftech.cdomanagment.service;
 
-import com.lordsoftech.cdomanagment.model.Model;
-import com.lordsoftech.cdomanagment.model.ModelList;
 import com.lordsoftech.cdomanagment.model.Payment;
 import com.lordsoftech.cdomanagment.model.PaymentList;
 import com.lordsoftech.cdomanagment.repository.PaymentRepository;
@@ -52,12 +50,9 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentList searchPayments(Payment searched) {
-        List<Payment> dbDomain = new ArrayList<>();
-        dbDomain.addAll(repository.findAllByPaymentTypeContainingIgnoreCase(searched.getPaymentType()));
-        PaymentList list = new PaymentList();
-        list.setList(dbDomain);
-        return list;
+    public List<Payment> searchPayments(Payment searched) {
+
+        return repository.findAllByPaymentTypeContainingIgnoreCase(searched.getPaymentType());
     }
 
 

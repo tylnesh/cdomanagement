@@ -12,7 +12,7 @@ public interface ModelService {
     Model getModel(Long id);
     Integer updateModels(ModelList updated);
     Integer deleteModels(ModelList deleted);
-    ModelList searchModels(Model searched);
+    List<Model> searchModels(Model searched);
 
     void linkDesignModel(Model model, Design design);
 

@@ -34,7 +34,7 @@ public class DealerController extends GenericController<Dealer> {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<DealerList> getSearchPage(@RequestBody @Valid Dealer searched) {
+    public ResponseEntity<List<Dealer>> getSearchPage(@RequestBody @Valid Dealer searched) {
         return ResponseEntity.ok(service.searchDealers(searched));
     }
 

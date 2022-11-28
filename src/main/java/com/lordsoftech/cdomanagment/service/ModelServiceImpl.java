@@ -59,15 +59,13 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public ModelList searchModels(Model searched) {
+    public List<Model> searchModels(Model searched) {
         List<Model> dbDomain = new ArrayList<>();
         dbDomain.addAll(modelRepository.findAllByModelContainingIgnoreCase(searched.getModel()));
         dbDomain.addAll(modelRepository.findAllByManufacturerContainingIgnoreCase(searched.getManufacturer()));
         dbDomain.addAll(modelRepository.findAllByYearFrom(searched.getYearFrom()));
         dbDomain.addAll(modelRepository.findAllByYearTo(searched.getYearTo()));
-        ModelList list = new ModelList();
-        list.setList(dbDomain);
-        return list;
+        return dbDomain;
     }
 
     @Override

@@ -62,7 +62,7 @@ public class DealerServiceImpl implements DealerService {
     };
 
     @Override
-    public DealerList searchDealers(Dealer searched) {
+    public List<Dealer> searchDealers(Dealer searched) {
         return repository.findDealersByDealerContainingIgnoreCaseOrSlugContainingIgnoreCase(searched.getDealer(), searched.getSlug());
     }
 }

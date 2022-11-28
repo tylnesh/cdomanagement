@@ -13,7 +13,7 @@ public interface PrinterService {
     Integer updatePrinters(PrinterList updated);
     Integer deletePrinters(PrinterList deleted);
 
-    PrinterList searchPrinters(Printer searched);
+    List<Printer> searchPrinters(Printer searched);
 
 
 

@@ -3,6 +3,8 @@ package com.lordsoftech.cdomanagment.service;
 import com.lordsoftech.cdomanagment.model.Dealer;
 import com.lordsoftech.cdomanagment.model.DealerList;
 
+import java.util.List;
+
 public interface DealerService {
     Dealer saveDealer(Dealer dealer);
     Dealer getDealer(String dealer);
@@ -10,5 +12,5 @@ public interface DealerService {
     DealerList getDealers();
     Integer updateDealers(DealerList updated);
     Integer deleteDealers(DealerList deleted);
-    DealerList searchDealers(Dealer searched);
+    List<Dealer> searchDealers(Dealer searched);
 }

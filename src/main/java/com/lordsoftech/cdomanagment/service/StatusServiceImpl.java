@@ -51,7 +51,7 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public StatusList searchStatuses(Status searched) {
+    public List<Status> searchStatuses(Status searched) {
         return repository.findAllByStatusContainingIgnoreCase(searched.getStatus());
     }
 }

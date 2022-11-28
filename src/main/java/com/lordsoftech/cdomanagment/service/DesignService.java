@@ -10,6 +10,6 @@ public interface DesignService {
     Design saveDesign(Design design);
     Design getDesign(String design);
     Design getDesign(Long id);
-    DesignList searchDesigns(Design searched);
+    List<Design> searchDesigns(Design searched);
     void linkDesignModel(Design design, Model model);
 }

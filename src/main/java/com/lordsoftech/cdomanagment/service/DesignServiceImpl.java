@@ -42,12 +42,8 @@ public class DesignServiceImpl implements DesignService{
         return null;
     }
     @Override
-    public DesignList searchDesigns(Design searched) {
-        List<Design> dbDomain = new ArrayList<>();
-        dbDomain.addAll(designRepository.findAllByDesignContainsIgnoreCase(searched.getDesign()));
-        DesignList list = new DesignList();
-        list.setList(dbDomain);
-        return list;
+    public List<Design> searchDesigns(Design searched) {
+        return designRepository.findAllByDesignContainsIgnoreCase(searched.getDesign());
     }
     @Override
     public void linkDesignModel(Design pairDesign, Model pairModel) {

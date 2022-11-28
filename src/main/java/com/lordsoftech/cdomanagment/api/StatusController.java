@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/status")
@@ -35,7 +36,7 @@ public class StatusController extends GenericController<Status> {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<StatusList> getSearchPage(@RequestBody @Valid Status searched) {
+    public ResponseEntity<List<Status>> getSearchPage(@RequestBody @Valid Status searched) {
         return ResponseEntity.ok(service.searchStatuses(searched));
     }
 }

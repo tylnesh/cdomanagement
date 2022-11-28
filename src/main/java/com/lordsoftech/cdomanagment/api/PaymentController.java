@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/payment")
@@ -37,7 +38,7 @@ public class PaymentController extends GenericController<Payment> {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<PaymentList> getSearchPage(@RequestBody @Valid Payment searched) {
+    public ResponseEntity<List<Payment>> getSearchPage(@RequestBody @Valid Payment searched) {
         return ResponseEntity.ok(service.searchPayments(searched));
     }
 

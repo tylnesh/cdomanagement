@@ -36,7 +36,7 @@ public class ModelController extends GenericController<Model> {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<ModelList> getSearchPage(@RequestBody @Valid Model searched) {
+    public ResponseEntity<List<Model>> getSearchPage(@RequestBody @Valid Model searched) {
         return ResponseEntity.ok(service.searchModels(searched));
     }
 }
