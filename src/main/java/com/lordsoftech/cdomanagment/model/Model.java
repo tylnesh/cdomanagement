@@ -1,10 +1,9 @@
 package com.lordsoftech.cdomanagment.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "models")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Model implements GenericEntity<Model> {
     @Id
@@ -27,7 +27,8 @@ public class Model implements GenericEntity<Model> {
 
     private short yearFrom, yearTo;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(mappedBy = "models")
     Set<Design> designs;
 
     @CreationTimestamp

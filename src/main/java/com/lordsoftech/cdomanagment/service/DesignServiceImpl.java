@@ -41,6 +41,28 @@ public class DesignServiceImpl implements DesignService{
         }
         return null;
     }
+
+    @Override
+    public Integer updateDesigns(DesignList updated) {
+        List<Design> dbDomain = new ArrayList<>();
+        updated.getList().forEach((updatedItem) -> {
+            dbDomain.add(getDesign(updatedItem.getId()));
+            dbDomain.get(dbDomain.size()-1).update(updatedItem);
+        });
+        designRepository.saveAll(dbDomain);
+        return dbDomain.size();
+    }
+
+    @Override
+    public Integer deleteDesigns(DesignList deleted) {
+        List<Design> dbDomain = new ArrayList<>();
+        deleted.getList().forEach((deletedItem) -> {
+            dbDomain.add(getDesign(deletedItem.getId()));
+        });
+        designRepository.deleteAll(dbDomain);
+        return dbDomain.size();
+    }
+
     @Override
     public List<Design> searchDesigns(Design searched) {
         return designRepository.findAllByDesignContainsIgnoreCase(searched.getDesign());
