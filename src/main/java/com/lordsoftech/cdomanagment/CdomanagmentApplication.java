@@ -67,6 +67,8 @@ public class CdomanagmentApplication {
 			statusService.saveStatus(new Status("Upstairs", "#0000FF"));
 
 			designService.linkDesignModel(designService.getDesign((long) 1), modelService.getModel((long) 1));
+			designService.linkDesignModel(designService.getDesign((long) 1), modelService.getModel((long) 5));
+
 
 
 		};
