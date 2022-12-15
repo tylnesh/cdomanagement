@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/role/addtouser")
-    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+    public ResponseEntity<?>addRoleToUser(@RequestBody @NotNull RoleToUserForm form) {
         userService.addRoleToUser(form.getUsernameOrEmail(), form.getRoleName());
         return ResponseEntity.ok().build();
     }

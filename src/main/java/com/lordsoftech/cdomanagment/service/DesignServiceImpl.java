@@ -3,7 +3,6 @@ package com.lordsoftech.cdomanagment.service;
 import com.lordsoftech.cdomanagment.model.Design;
 import com.lordsoftech.cdomanagment.model.DesignList;
 import com.lordsoftech.cdomanagment.model.Model;
-import com.lordsoftech.cdomanagment.model.ModelList;
 import com.lordsoftech.cdomanagment.repository.DesignRepository;
 import com.lordsoftech.cdomanagment.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +64,12 @@ public class DesignServiceImpl implements DesignService{
 
     @Override
     public List<Design> searchDesigns(Design searched) {
-        return designRepository.findAllByDesignContainsIgnoreCase(searched.getDesign());
+        List<Design> searchResult = new ArrayList<>();
+        searchResult.addAll(designRepository.findAllByDesignContainsIgnoreCase(searched.getDesign()));
+        searchResult.addAll(designRepository.findAllByModels_ModelContainsIgnoreCase(searched.getDesign()));
+        searchResult.addAll(designRepository.findAllByModels_ManufacturerContainsIgnoreCase(searched.getDesign()));
+
+        return searchResult;
     }
     @Override
     public void linkDesignModel(Design pairDesign, Model pairModel) {
